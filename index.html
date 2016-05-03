@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #efefef;
+        }
+
+        #video1 {
+            width: 80%;
+            height: 80%;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<video controls id="video1">
+    <source src="public/resource/1.mp4"></source>
+</video>
+<input type="button" id="fullScreenBtn" value="全屏">
+
+<script>
+    window.onload = function () {
+        var fullScreenBtn = document.getElementById('fullScreenBtn');
+
+        fullScreenBtn.addEventListener('click', function () {
+            toggleFullScreen();
+        }, false);
+
+        function toggleFullScreen() {
+            var video1 = document.getElementById('video1');
+
+            if (!video1.fullscreenElement &&    // alternative standard method
+                    !video1.mozFullScreenElement && !video1.webkitFullscreenElement) {  // current working methods
+                if (video1.requestFullscreen) {
+                    video1.requestFullscreen();
+                } else if (video1.mozRequestFullScreen) {
+                    video1.mozRequestFullScreen();
+                } else if (video1.webkitRequestFullscreen) {
+                    video1.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                if (video1.cancelFullScreen) {
+                    video1.cancelFullScreen();
+                } else if (video1.mozCancelFullScreen) {
+                    video1.mozCancelFullScreen();
+                } else if (video1.webkitCancelFullScreen) {
+                    video1.webkitCancelFullScreen();
+                }
+            }
+        }
+    };
+</script>
+</body>
+</html>
